@@ -1,0 +1,13 @@
+services:
+  im:
+    image: dpokidov/imagemagick
+    volumes:
+      - ./svg:/input:ro
+      - ./png:/output
+    entrypoint: ["bash"]
+    command: "convert -size 100x100 xc:none -draw \"roundrectangle 0,0,100,100,15,15\" mask.png
+      convert original_picture.png -matte mask.png \
+      -compose DstIn -composite picture_with_rounded_corners.png"
+
+# convert -density 384 -background transparent -fill "#607D8B" -colorize 100 favicon.svg -define icon:auto-resize -colors 256 favicon.ico
+
